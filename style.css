@@ -1,0 +1,335 @@
+/* ==========================================================================
+   Personal academic site — economics & finance convention
+   Single stylesheet, no dependencies, no external font requests.
+   Change the accent color and max width below to restyle the whole site.
+   ========================================================================== */
+
+:root {
+  --measure: 46rem;          /* content width — keep narrow for readability */
+  --ink: #17181a;
+  --ink-soft: #3d4147;
+  --muted: #6b7178;
+  --accent: #1f4d38;         /* deep green; try #1e3a5f (navy) or #7a1c2e (maroon) */
+  --accent-soft: #e8efea;
+  --rule: #e3e2df;
+  --bg: #fdfdfc;
+  --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, "Times New Roman", serif;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ink: #e8e6e1;
+    --ink-soft: #cbc8c2;
+    --muted: #9a978f;
+    --accent: #8fc4a6;
+    --accent-soft: #1c2521;
+    --rule: #33322f;
+    --bg: #16171a;
+  }
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  padding: 0 1.5rem 5rem;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: 1.0625rem;   /* 17px */
+  line-height: 1.65;
+  text-rendering: optimizeLegibility;
+}
+
+.wrap { max-width: var(--measure); margin: 0 auto; }
+
+/* ---------- Links ---------- */
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
+}
+a:hover { border-bottom-color: var(--accent); }
+a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* ---------- Masthead & navigation ---------- */
+
+header.masthead {
+  padding: 3.25rem 0 0;
+}
+
+.masthead h1 {
+  font-size: 2.1rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+  margin: 0 0 0.3rem;
+}
+.masthead h1 a { color: inherit; border: 0; }
+
+.masthead .role {
+  font-family: var(--sans);
+  font-size: 0.9375rem;
+  color: var(--muted);
+  margin: 0;
+}
+
+nav.site {
+  margin: 1.5rem 0 0;
+  padding: 0.85rem 0;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  font-family: var(--sans);
+  font-size: 0.9375rem;
+}
+nav.site ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.4rem;
+}
+nav.site a {
+  border: 0;
+  color: var(--ink-soft);
+}
+nav.site a:hover { color: var(--accent); }
+nav.site a[aria-current="page"] {
+  color: var(--ink);
+  font-weight: 600;
+  box-shadow: inset 0 -2px 0 var(--accent);
+}
+
+/* ---------- Sections & headings ---------- */
+
+main { padding-top: 2.5rem; }
+
+h2 {
+  font-family: var(--sans);
+  font-size: 0.8125rem;
+  font-weight: 650;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 3rem 0 1.1rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--rule);
+}
+main > section:first-child > h2,
+main > h2:first-child { margin-top: 0; }
+
+h3 {
+  font-size: 1.0625rem;
+  font-weight: 600;
+  margin: 0 0 0.2rem;
+  line-height: 1.4;
+}
+
+p { margin: 0 0 1.05rem; }
+
+hr {
+  border: 0;
+  border-top: 1px solid var(--rule);
+  margin: 2.5rem 0;
+}
+
+/* ---------- Home: photo + intro ---------- */
+
+.intro {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+  margin-bottom: 2.25rem;
+}
+.intro .bio { flex: 1 1 auto; min-width: 0; }
+.intro .bio p:last-child { margin-bottom: 0; }
+
+.portrait {
+  flex: 0 0 172px;
+  width: 172px;
+}
+.portrait img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 3px;
+  border: 1px solid var(--rule);
+}
+.portrait .caption {
+  font-family: var(--sans);
+  font-size: 0.75rem;
+  color: var(--muted);
+  margin-top: 0.5rem;
+  line-height: 1.4;
+}
+
+@media (max-width: 34rem) {
+  .intro { flex-direction: column-reverse; gap: 1.5rem; }
+  .portrait { flex-basis: auto; width: 150px; }
+}
+
+/* ---------- Fact list (fields, contact, placement) ---------- */
+
+dl.facts {
+  margin: 0;
+  display: grid;
+  grid-template-columns: 8.5rem 1fr;
+  gap: 0.45rem 1rem;
+  font-size: 1rem;
+}
+dl.facts dt {
+  font-family: var(--sans);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--muted);
+  padding-top: 0.18rem;
+}
+dl.facts dd { margin: 0; }
+
+@media (max-width: 30rem) {
+  dl.facts { grid-template-columns: 1fr; gap: 0.1rem 0; }
+  dl.facts dd { margin-bottom: 0.7rem; }
+}
+
+/* ---------- Papers ---------- */
+
+.paper {
+  margin: 0 0 1.9rem;
+  padding-left: 0;
+}
+.paper:last-child { margin-bottom: 0; }
+
+.paper .title { font-weight: 600; }
+.paper .title a { border-bottom-color: transparent; }
+.paper .title a:hover { border-bottom-color: var(--accent); }
+
+.paper .authors,
+.paper .venue,
+.paper .status {
+  font-size: 0.9375rem;
+  color: var(--ink-soft);
+  margin: 0.1rem 0 0;
+}
+.paper .venue { font-style: italic; }
+
+.paper .status {
+  font-family: var(--sans);
+  font-size: 0.8125rem;
+  color: var(--accent);
+}
+
+.tag {
+  display: inline-block;
+  font-family: var(--sans);
+  font-size: 0.6875rem;
+  font-weight: 650;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: var(--accent-soft);
+  padding: 0.15rem 0.45rem;
+  border-radius: 3px;
+  vertical-align: 0.12em;
+  margin-left: 0.35rem;
+}
+
+/* Link row: [Paper] [SSRN] [Slides] */
+.paper .links {
+  font-family: var(--sans);
+  font-size: 0.8125rem;
+  margin-top: 0.45rem;
+}
+.paper .links a { margin-right: 0.9rem; }
+
+/* Collapsible abstract — pure HTML <details>, no JavaScript */
+.paper details { margin-top: 0.5rem; }
+.paper summary {
+  font-family: var(--sans);
+  font-size: 0.8125rem;
+  color: var(--accent);
+  cursor: pointer;
+  display: inline-block;
+  list-style: none;
+}
+.paper summary::-webkit-details-marker { display: none; }
+.paper summary::before { content: "▸ "; }
+.paper details[open] summary::before { content: "▾ "; }
+.paper details[open] summary { margin-bottom: 0.5rem; }
+.paper .abstract {
+  font-size: 0.9375rem;
+  color: var(--ink-soft);
+  border-left: 2px solid var(--rule);
+  padding-left: 1rem;
+  margin: 0;
+}
+
+/* ---------- Teaching / list items ---------- */
+
+.entry { margin-bottom: 1.6rem; }
+.entry:last-child { margin-bottom: 0; }
+.entry .meta {
+  font-family: var(--sans);
+  font-size: 0.8125rem;
+  color: var(--muted);
+  margin: 0.1rem 0 0.35rem;
+}
+.entry p { margin-bottom: 0.4rem; font-size: 0.9375rem; }
+
+ul.plain { list-style: none; margin: 0; padding: 0; }
+ul.plain li { margin-bottom: 0.6rem; }
+
+/* ---------- CV embed ---------- */
+
+.cv-frame {
+  width: 100%;
+  height: 84vh;
+  min-height: 480px;
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  background: var(--bg);
+  margin-top: 1rem;
+}
+
+.button {
+  display: inline-block;
+  font-family: var(--sans);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--bg);
+  background: var(--accent);
+  border: 0;
+  border-radius: 3px;
+  padding: 0.5rem 1rem;
+}
+.button:hover { border: 0; opacity: 0.9; }
+
+/* ---------- Footer ---------- */
+
+footer.site {
+  margin-top: 4rem;
+  padding-top: 1.1rem;
+  border-top: 1px solid var(--rule);
+  font-family: var(--sans);
+  font-size: 0.8125rem;
+  color: var(--muted);
+}
+footer.site a { color: var(--muted); border-bottom-color: var(--rule); }
+footer.site a:hover { color: var(--accent); }
+
+/* ---------- Print (someone will print your CV page) ---------- */
+
+@media print {
+  nav.site, footer.site, .cv-frame { display: none; }
+  body { font-size: 11pt; color: #000; background: #fff; padding: 0; }
+  a { color: #000; border: 0; }
+  a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 9pt; }
+}
